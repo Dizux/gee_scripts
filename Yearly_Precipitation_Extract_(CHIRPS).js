@@ -56,9 +56,24 @@ var data = byYear.map(function(image) {
 
 var nowDate = new Date(); 
 var date = nowDate.getFullYear()+'-'+(nowDate.getMonth()+1)+'-'+nowDate.getDate();
+
+print(data.limit(1))
+//use the properties from the above in console to determine which selectors to use below 
+//It helps to remove the geo information to reduced the size of the export by not including it in the selectors list
+
 // Export the FeatureCollection.
 Export.table.toDrive({
   collection: data,
+  selectors: [
+    'ADM0_PCODE',
+    'ADM0_REF',
+    'bands',
+    'max',
+    'mean',
+    'min',
+    'sum',
+    'year'
+  ],
   folder: 'Rainfall_Data/' + date,
   description: 'Yearly_precipitation_data',
   fileFormat: 'CSV'
